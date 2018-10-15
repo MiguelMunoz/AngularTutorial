@@ -1,0 +1,17 @@
+<!--<div><span>id: </span>{{hero.id}}</div>-->
+<h2>Hero Detail</h2>
+<!-- This used to have this attribute:  class="heroes" -->
+<!-- Removing it didn't help.-->
+<div *ngIf="hero">
+  <h2>Hero: {{hero.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{hero.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="hero.name" placeholder="name">
+    </label>
+  </div>
+  <button (click)="goBack()">Go Back</button>
+</div>
+<h3>(Hero Detail)</h3>
+
+<!--<div><span>name: </span>{{hero.name}}</div>-->
