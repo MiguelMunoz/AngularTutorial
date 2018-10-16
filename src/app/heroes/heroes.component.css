@@ -1,31 +1,14 @@
-/*body, input[text], button {*/
-  /*color: #888;*/
-  /*font-family: Cambria, Georgia;*/
-  /*text-align: left*/
-/*}*/
-
-/*p {*/
-  /*text-align: left*/
-/*}*/
-
 /* HeroesComponent's private CSS styles */
-.selected {
-  background-color: #CFD8DC !important;
-  color: white;
-}
-
 .heroes {
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
   width: 15em;
-  text-align: left;
 }
 
 .heroes li {
-  cursor: pointer;
   position: relative;
-  left: 0;
+  cursor: pointer;
   background-color: #EEE;
   margin: .5em;
   padding: .3em 0;
@@ -34,21 +17,22 @@
   text-align: left
 }
 
-.heroes li.selected:hover {
-  background-color: #BBD8DC !important;
-  color: white;
-}
-
 .heroes li:hover {
   color: #607D8B;
   background-color: #DDD;
   left: .1em;
 }
 
-.heroes .text {
+.heroes a {
+  color: #888;
+  text-decoration: none;
   position: relative;
-  top: -3px;
-  text-align: left;
+  display: block;
+  width: 250px;
+}
+
+.heroes a:hover {
+  color: #607D8B;
 }
 
 .heroes .badge {
@@ -62,6 +46,8 @@
   left: -1px;
   top: -4px;
   height: 1.8em;
+  min-width: 16px;
+  text-align: right;
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
 }

@@ -14,7 +14,7 @@ export class HeroService {
     private messageService: MessageService
   ) { }
 
-  private heroesUrl = 'http://localhost:4848/NeptuneDreams/Heroes/1.0.0/heroes';
+  private heroesUrl = 'http://localhost:4848/NeptuneDreams/Heroes/1.0.0/heroes/';
 
   getHeroes(): Observable<Hero[]> {
     this.messageService.add('HeroService: fetched heroes');

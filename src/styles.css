@@ -13,6 +13,7 @@ h2, h3 {
 
 body {
   margin: 2em;
+  text-align: left;
 }
 
 body, input[text], button {
