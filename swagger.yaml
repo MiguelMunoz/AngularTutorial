@@ -1,0 +1,151 @@
+swagger: '2.0'
+info:
+  description: This is a simple API
+  version: 1.0.0
+  title: Simple Inventory API
+  # put the contact info for your development or API team
+  contact:
+    email: you@your-company.com
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: admins
+  description: Secured Admin-only calls
+- name: developers
+  description: Operations available to regular developers
+
+paths:
+  /heroes:
+    get:
+      tags:
+      - developers
+      summary: Get array of heroes
+      operationId: getHeroes
+      description: |
+        Gets heroes with the specified name, or all the heroes if no name is specified. Returns an empty array if name is not found.
+      produces:
+      - application/json
+      parameters:
+      - name: term
+        in: query
+        required: false
+        description: A portion of the hero's name
+        type: string
+      responses:
+        200:
+          description: array of heroes
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Hero'
+        404:
+          description:
+            Not found
+    put:
+      tags:
+      - developers
+      summary: Update or add a hero
+      description: Updates an exisiting hero or add a new hero
+      consumes:
+      - application/json
+      parameters:
+      - in: body
+        required: true
+        name: hero
+        description: Revised Hero
+        schema:
+          $ref: '#/definitions/Hero'
+      responses:
+        200:
+          description: Okay
+  /heroes/{id}:
+    get:
+      tags:
+      - developers
+      summary: Get a hero by id
+      operationId: getHero
+      description: |
+        Search for a hero by ID. Return 'undefined' if not found
+      parameters:
+      - in: path
+        name: id
+        description: id
+        required: true
+        type: integer
+        format: int32
+      produces:
+      - application/json
+      responses:
+        200:
+          description: ok
+          schema:
+            $ref: '#/definitions/Hero'
+    delete:
+      tags:
+      - developers
+      summary: Delete a hero
+      operationId: deleteHero
+      description: Delete the hero with the specified id
+      parameters:
+      - in: path
+        name: id
+        description: id
+        required: true
+        type: integer
+        format: int32
+      responses:
+        200:
+          description: OK
+        404:
+          description: Not Found
+  /heroes/add:
+    put:
+      tags:
+      - developers
+      summary: Add a new hero
+      operationId: addHero
+      description: Add a new hero
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        required: true
+        name: hero
+        description: New Hero
+        schema:
+          $ref: '#/definitions/Hero'
+      responses:
+        201:
+          description: created
+          schema:
+            $ref: '#/definitions/Id'
+        400:
+          description: Bad Request
+definitions:
+  Hero:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      name:
+        type: string
+  Id:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+# basePath: /app
+schemes:
+- https
+# Added by API Auto Mocking Plugin
+basePath: /NeptuneDreams/Heroes/1.0.0

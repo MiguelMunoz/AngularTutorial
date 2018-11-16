@@ -40,7 +40,8 @@ export class HeroesComponent implements OnInit {
   //   }
   // }
 
-  getHeroes(): void {
+  // The tutorial called this getHeroes, but loadHeroes is a much better name.
+  loadHeroes(): void {
     this.heroService.getHeroes().subscribe(theHeroes => {
       this.heroes = theHeroes;
       this.messageService.add(`getHeroes returned ${this.heroes.length} Heroes`)
@@ -48,15 +49,17 @@ export class HeroesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getHeroes();
+    this.loadHeroes();
   }
 
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
     this.heroService.addHero({ name } as Hero)
-    .subscribe(hero => {
-      this.heroes.push(hero);
+    .subscribe(_ => {
+      // The tutorial says to do this, but it doesn't work. It puts a blank line onto the page.
+      // this.heroes.push(hero);
+      this.loadHeroes(); // This works much better.
     });
   }
 

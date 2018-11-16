@@ -36,7 +36,7 @@ export class HeroService {
     this.messageService.add(`HeroService fetched hero id=${id}`);
     return this.http.get<Hero>(url)
       .pipe(
-        tap(hero => this.log(`fetched hero id=${id}`)),
+        tap(_ => this.log(`fetched hero id=${id}`)),
         catchError(this.handleError<Hero>(`getHero id=${id}`))
       );
   }
@@ -59,11 +59,24 @@ export class HeroService {
 
   deleteHero (hero: Hero | number): Observable<Hero> {
     const id = typeof hero === 'number' ? hero : hero.id;
-    const url = `${this.heroesUrl}/delete/${id}`;
+    const url = `${this.heroesUrl}/${id}`;
 
     return this.http.delete<Hero>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted hero id=${id}`)),
       catchError(this.handleError<Hero>('deleteHero'))
+    );
+  }
+
+  /* Get heroes whose name contains search term */
+  searchHeroes(term: string): Observable<Hero[]> {
+    this.messageService.add(`Search for "${term}"`);
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http.get<Hero[]>(`${this.heroesUrl}/?term=${term}`).pipe(
+      tap(_ => this.log(`found heroes matching "${term}"`)),
+    catchError(this.handleError<Hero[]>('searchHeroes', []))
     );
   }
 
